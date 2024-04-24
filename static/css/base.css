@@ -2,19 +2,6 @@ html {
     height: 100%;
 }
 
-.roboto-regular {
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-  
-  .roboto-regular-italic {
-    font-family: "Roboto", sans-serif;
-    font-weight: 400;
-    font-style: italic;
-  }
-  
-
 body {
     background: url('/media/risen-wang-20jX9b35r_M-unsplash.jpg') no-repeat center center fixed;
     background-size: cover;
@@ -38,6 +25,12 @@ body {
 
 .main-logo-link {
     width: fit-content;
+}
+
+.shop-now-button {
+    background: black;
+    color: white;
+    min-width: 260px;
 }
 
 .btn-black {
@@ -103,10 +96,11 @@ a.category-badge > span.badge:hover {
     right: 10px;
 }
 
-.btt-link {
+.btt-link,
+.update-link,
+.remove-item {
     cursor: pointer;
 }
-
 
 /* -------------------------------- Media Queries */
 
