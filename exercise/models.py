@@ -15,9 +15,9 @@ class Exercise(models.Model):
     bodypart = models.CharField(max_length=100)
     equipment = models.CharField(max_length=100)
     level = models.CharField(max_length=100)
-    rating = models.FloatField(default=0)
+    rating = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     ratingdesc = models.CharField(max_length=200)
-    category = models.ForeignKey(ExerciseCategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(ExerciseCategory, null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.title
