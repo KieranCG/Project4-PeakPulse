@@ -1,17 +1,6 @@
 from django.contrib import admin
-from .models import Exercise
+from .models import Exercise, ExerciseCategory
 
 
-class ExerciseAdmin(admin.ModelAdmin):
-    list_display = (
-        'title',
-        'body_part',
-        'equipment',
-        'level',
-        'rating',
-    )
-
-    ordering = ('title',)
-
-
-admin.site.register(Exercise, ExerciseAdmin)
+admin.site.register(Exercise)
+admin.site.register(ExerciseCategory)
