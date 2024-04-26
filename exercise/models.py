@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    friendly_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Exercise(models.Model):
     exercise_id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=255)
