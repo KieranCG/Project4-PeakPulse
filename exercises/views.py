@@ -1,12 +1,11 @@
 from django.core.paginator import Paginator
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Exercise
 
 
 def all_exercises(request):
     """ A view to show all exercises, including sorting and search queries """
 
-    # Retrieve all exercises from the database
     exercises_list = Exercise.objects.all()
 
     # Number of exercises to display per page
@@ -30,3 +29,15 @@ def all_exercises(request):
     }
 
     return render(request, 'exercises/exercises.html', context)
+
+
+def exercise_detail(request, exercise_id):
+    """ A view to show individual exercise details """
+
+    exercise = get_object_or_404(Exercise, pk=exercise_id)
+
+    context = {
+        'exercise': exercise,
+    }
+
+    return render(request, 'exercises/exercises_detail.html', context)
