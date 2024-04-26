@@ -1,28 +1,23 @@
 from django.db import models
 
 
-class Category(models.Model):
+class ExerciseCategory(models.Model):
     name = models.CharField(max_length=100)
-    friendly_name = models.CharField(max_length=100, null=True, blank=True, default="")
+    friendly_name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
 
-    def get_friendly_name(self):
-        return self.friendly_name
-
 
 class Exercise(models.Model):
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=200)
     description = models.TextField()
-    body_part = models.CharField(max_length=100)
+    bodypart = models.CharField(max_length=100)
     equipment = models.CharField(max_length=100)
     level = models.CharField(max_length=100)
-    rating = models.FloatField(blank=True, null=True)
-    rating_desc = models.CharField(max_length=255, blank=True)
-
-    # ForeignKey relationship
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    rating = models.FloatField(default=0)
+    ratingdesc = models.CharField(max_length=200)
+    category = models.ForeignKey(ExerciseCategory, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
