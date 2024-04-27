@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Exercise, ExerciseCategory
+from .models import Exercise, ExerciseCategory, ExerciseLog
 
 
 class ExerciseAdmin(admin.ModelAdmin):
@@ -8,7 +8,6 @@ class ExerciseAdmin(admin.ModelAdmin):
         'rating',
         'category',
     )
-
     ordering = ('category',)
 
 
@@ -19,5 +18,21 @@ class ExerciseCategoryAdmin(admin.ModelAdmin):
     )
 
 
+class ExerciseLogAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'exercise',
+        'date',
+        'sets',
+        'repetitions',
+        'duration',
+        'weight',
+        'distance',
+        'intensity',
+        'notes',
+    )
+
+
 admin.site.register(Exercise, ExerciseAdmin)
 admin.site.register(ExerciseCategory, ExerciseCategoryAdmin)
+admin.site.register(ExerciseLog, ExerciseLogAdmin)

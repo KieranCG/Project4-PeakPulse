@@ -39,7 +39,7 @@ def all_exercises(request):
     items_per_page = 20  # Change this to the desired number of items per page
     paginator = Paginator(exercises_list, items_per_page)
     page_number = request.GET.get('page', 1)
-    
+
     try:
         page_obj = paginator.page(page_number)
     except EmptyPage:
