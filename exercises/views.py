@@ -1,6 +1,8 @@
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404
+from django.db.models.functions import Lower
 from .models import Exercise
+from django.db.models import F
 
 
 def all_exercises(request):
@@ -8,6 +10,24 @@ def all_exercises(request):
 
     exercises_list = Exercise.objects.all()
 
+    # Sorting
+    sort = request.GET.get('sort')
+    sortkey = 'title'  # Default sort key
+    if sort == 'title':
+        sortkey = 'title'
+    elif sort == 'rating':
+        sortkey = 'rating'
+    # Add other sorting options as needed
+
+    direction = request.GET.get('direction')
+    if direction == 'desc':
+        sortkey = f'-{sortkey}'
+
+    if sort == 'title':
+        # Use lower_name for case-insensitive sorting by title
+        exercises_list = exercises_list.annotate(lower_title=Lower('title')).order_by(sortkey)
+    else:
+        exercises_list = exercises_list.order_by(sortkey)
     # Number of exercises to display per page
     items_per_page = 20  # Change this to 20 for 20 items per page
 
