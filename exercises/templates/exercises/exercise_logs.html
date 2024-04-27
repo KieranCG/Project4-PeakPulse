@@ -10,10 +10,40 @@
 {% endblock %}
 
 {% block content %}
+    <div class="overlay"></div>
     <div class="container">
         <div class="row">
-            <div class="col">
-                {{ exercise_log  }}
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">Exercise Logs</h2>
+                <hr class="w-50 mb-1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-10 offset-1">
+                <div class="row mt-1 mb-2"></div>
+                <div class="row">
+                    {% for log in exercise_log %}
+                        <div class="col-md-6 col-lg-4 col-xl-3 mb-4">
+                            <div class="card h-100 border-0">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ log.user }}</h5>
+                                    <p class="card-text">{{ log.date }}</p>
+                                    <p class="card-text">Exercise: {{ log.exercise }}</p>
+                                    <p class="card-text">Sets: {{ log.sets }}</p>
+                                    <p class="card-text">Repetitions: {{ log.repetitions }}</p>
+                                    <p class="card-text">Duration: {{ log.duration }}</p>
+                                    <p class="card-text">Weight: {{ log.weight }}</p>
+                                    <p class="card-text">Distance: {{ log.distance }}</p>
+                                    <p class="card-text">Intensity: {{ log.intensity }}</p>
+                                    <p class="card-text">Notes: {{ log.notes }}</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% if forloop.counter|divisibleby:3 %}
+                            <div class="w-100"></div> <!-- Break line every 3 items -->
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
