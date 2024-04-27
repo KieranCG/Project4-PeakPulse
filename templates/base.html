@@ -47,9 +47,13 @@
                 </a>
             </div>
             <div class="col-12 col-lg-4 my-auto py-1 py-lg-0">
-                <form method="GET" action="{% url 'products' %}">
+                <form id="searchForm" method="GET" action="#">
                     <div class="input-group w-100">
-                        <input class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search our site">
+                        <input id="searchInput" class="form-control border border-black rounded-0" type="text" name="q" placeholder="Search">
+                        <select id="searchType" class="form-control">
+                            <option value="products">Products</option>
+                            <option value="exercises">Exercises</option>
+                        </select>
                         <div class="input-group-append">
                             <button class="form-control btn btn-black border border-black rounded-0" type="submit">
                                 <span class="icon">
@@ -144,7 +148,29 @@
     <script type="text/javascript">
         $('.toast').toast('show');
     </script>
-    {% endblock %}
+    <script>
+        // JavaScript code for search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listener to the search form
+            document.getElementById('searchForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Get the search query and search type
+                var searchQuery = document.getElementById('searchInput').value;
+                var searchType = document.getElementById('searchType').value;
+
+                // Perform search based on the selected search type
+                if (searchType === 'products') {
+                    // Redirect to products search page with the query
+                    window.location.href = "/products/?q=" + encodeURIComponent(searchQuery);
+                } else if (searchType === 'exercises') {
+                    // Redirect to exercises search page with the query
+                    window.location.href = "/exercises/?q=" + encodeURIComponent(searchQuery);
+                }
+            });
+        });
+    </script>
+{% endblock %}
 
     
   </body>

@@ -2,7 +2,7 @@ from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.db.models.functions import Lower
 from .models import Exercise
-from django.db.models import F
+from django.db.models import F, Q
 
 
 def all_exercises(request):
@@ -24,28 +24,30 @@ def all_exercises(request):
         sortkey = f'-{sortkey}'
 
     if sort == 'title':
-        # Use lower_name for case-insensitive sorting by title
+        # Use lower_title for case-insensitive sorting by title
         exercises_list = exercises_list.annotate(lower_title=Lower('title')).order_by(sortkey)
     else:
         exercises_list = exercises_list.order_by(sortkey)
-    # Number of exercises to display per page
-    items_per_page = 20  # Change this to 20 for 20 items per page
 
-    # Initialize Paginator object with queryset and items per page
+    # Searching
+    search_term = request.GET.get('q')
+    if search_term:
+        queries = Q(title__icontains=search_term) | Q(description__icontains=search_term)
+        exercises_list = exercises_list.filter(queries)
+
+    # Pagination
+    items_per_page = 20  # Change this to the desired number of items per page
     paginator = Paginator(exercises_list, items_per_page)
-
-    # Get the current page number from the request, default to page 1
     page_number = request.GET.get('page', 1)
-
+    
     try:
-        # Get the page object for the requested page number
         page_obj = paginator.page(page_number)
     except EmptyPage:
-        # If the requested page is out of range, deliver last page of results
         page_obj = paginator.page(paginator.num_pages)
 
     context = {
         'page_obj': page_obj,
+        'search_term': search_term,
     }
 
     return render(request, 'exercises/exercises.html', context)
