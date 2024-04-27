@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col text-center mt-3">
+                <h2 class="logo-font">Exercise Log Details</h2>
+                <hr class="w-50 mb-1">
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6 col-lg-4 mx-auto">
+                <div class="exercise-details-container mb-5 mt-md-5">
+                    <p class="lead mb-0 text-left font-weight-bold">User: {{ exercise_log.user }}</p>
+                    <p>Date: {{ exercise_log.date }}</p>
+                    <p>Sets: {{ exercise_log.sets }}</p>
+                    <p>Repetitions: {{ exercise_log.repetitions }}</p>
+                    <p>Duration: {{ exercise_log.duration }}</p>
+                    <p>Weight: {{ exercise_log.weight }}</p>
+                    <p>Distance: {{ exercise_log.distance }}</p>
+                    <p>Intensity: {{ exercise_log.intensity }}</p>
+                    <p>Notes: {{ exercise_log.notes }}</p>
+                    <a href="{% url 'exercise_logs' %}" class="btn btn-outline-black rounded-0 mt-5">Back to Exercise Logs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -79,6 +79,17 @@ def all_exercise_logs(request):
     return render(request, 'exercises/exercise_logs.html', context)
 
 
+def exercise_log_detail(request, exercise_log_id):
+    """ A view to show details of a single exercise log """
+    exercise_log = get_object_or_404(ExerciseLog, pk=exercise_log_id)
+
+    context = {
+        'exercise_log': exercise_log,
+    }
+
+    return render(request, 'exercises/exercise_log_detail.html', context)
+
+
 @login_required
 def create_exercise_log(request):
     if request.method == 'POST':
