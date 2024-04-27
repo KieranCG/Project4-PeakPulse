@@ -7,6 +7,8 @@ class ExerciseAdmin(admin.ModelAdmin):
         'title',
         'rating',
         'category',
+        'bodypart',
+        'level',
     )
     ordering = ('category',)
 

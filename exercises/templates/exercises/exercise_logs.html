@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col text-center mt-3">
+            <h2 class="logo-font">Exercise Log</h2>
+            <hr class="w-50 mb-1">
+        </div>
+    </div>
+    <div class="row">
+        <div class="product-container col-10 offset-1">
+            <form method="POST" class="exercise-log-form">
+                {% csrf_token %}
+                <div class="row mt-3">
+                    <div class="col">
+                        {{ form.date }}
+                    </div>
+                    <div class="col">
+                        {{ form.exercise }}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        {{ form.sets }}
+                    </div>
+                    <div class="col">
+                        {{ form.repetitions }}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        {{ form.duration }}
+                    </div>
+                    <div class="col">
+                        {{ form.weight }}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        {{ form.distance }}
+                    </div>
+                    <div class="col">
+                        {{ form.intensity }}
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col">
+                        {{ form.notes }}
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary mt-3">Save</button>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}

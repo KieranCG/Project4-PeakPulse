@@ -1,7 +1,7 @@
 from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.db.models.functions import Lower
-from .models import Exercise
+from .models import Exercise, ExerciseLog
 from django.db.models import F, Q
 
 
@@ -63,3 +63,47 @@ def exercise_detail(request, exercise_id):
     }
 
     return render(request, 'exercises/exercises_detail.html', context)
+
+
+def all_exercise_logs(request):
+    """ A view to show all exercise logs, including sorting and search queries """
+
+    exercise_logs_list = ExerciseLog.objects.all()
+
+    # Sorting
+    sort = request.GET.get('sort')
+    sortkey = 'date'  # Default sort key
+    if sort == 'date':
+        sortkey = 'date'
+    elif sort == 'sets':
+        sortkey = 'sets'
+    # Add other sorting options as needed
+
+    direction = request.GET.get('direction')
+    if direction == 'desc':
+        sortkey = f'-{sortkey}'
+
+    exercise_logs_list = exercise_logs_list.order_by(sortkey)
+
+    # Searching
+    search_term = request.GET.get('q')
+    if search_term:
+        queries = Q(exercise__title__icontains=search_term) | Q(exercise__description__icontains=search_term)
+        exercise_logs_list = exercise_logs_list.filter(queries)
+
+    # Pagination
+    items_per_page = 20  # Change this to the desired number of items per page
+    paginator = Paginator(exercise_logs_list, items_per_page)
+    page_number = request.GET.get('page', 1)
+
+    try:
+        page_obj = paginator.page(page_number)
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
+    context = {
+        'page_obj': page_obj,
+        'search_term': search_term,
+    }
+
+    return render(request, 'exercises/exercise_logs.html', context)
