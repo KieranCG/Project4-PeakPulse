@@ -30,7 +30,7 @@
                         <select id="exercise" name="exercise" class="form-control">
                             <option value="">Select an exercise</option>
                             {% for exercise in exercises %}
-                                {% if exercise == selected_exercise %}
+                                {% if exercise.id == exercise_log.exercise.id %}
                                     <option value="{{ exercise.id }}" selected>{{ exercise.title }}</option>
                                 {% else %}
                                     <option value="{{ exercise.id }}">{{ exercise.title }}</option>
@@ -40,9 +40,8 @@
                     </div>
 
                     <label for="date">Date:</label>
-                    <input type="date" id="date" name="date" required class="form-control mb-3" value="{{ log_date }}">
-
-
+                    <input type="date" id="date" name="date" required class="form-control mb-3" value="{{ exercise_log.date|date:'Y-m-d' }}">
+                    
                     <label for="sets">Sets:</label>
                     <input type="number" id="sets" name="sets" min="1" value="{{ exercise_log.sets }}" required class="form-control mb-3"> <!-- Populate with existing data -->
 
