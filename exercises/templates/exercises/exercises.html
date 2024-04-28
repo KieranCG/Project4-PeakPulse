@@ -38,7 +38,12 @@
                         {% if search_term or current_categories or current_sorting != 'None_None' %}
                             <span class="small"><a href="{% url 'exercises' %}">Exercises Home</a> | </span>
                         {% endif %}
-                        {{ exercises|length }} Exercises{% if search_term %} found for <strong>"{{ search_term }}"</strong>{% endif %}
+                        {% if search_term %}
+                            {{ page_obj|length }} Exercises found for <strong>"{{ search_term }}"</strong>
+                        {% else %}
+                            {{ page_obj|length }} Exercises
+                        {% endif %}
+
                     </p>
                 </div>
             </div>
@@ -47,7 +52,7 @@
                 <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                     <div class="card h-100 border-0">
                         <div class="card-body pb-0">
-                            <h5 class="card-title"><a href="{% url 'exercise_detail' exercise.id %}">{{ exercise.title }}</a></h5>
+                            <h5 class="card-title">{{ exercise.title }}</h5>
                             <p class="card-text">{{ exercise.description }}</p>
                             <p class="card-text">Body Part: {{ exercise.bodypart }}</p>
                             <p class="card-text">Equipment: {{ exercise.equipment }}</p>
@@ -63,6 +68,11 @@
                                         <small class="text-muted">No Rating</small>
                                     {% endif %}
                                     <p class="card-text">Category: {{ exercise.category.name }}</p>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col">
+                                    <a href="{% url 'exercise_detail' exercise.id %}" class="btn btn-outline-black rounded-0 mt-3">View Details</a>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +99,7 @@
                     </div>
                 {% endif %}
                 {% endfor %}
-            </div>
+            </div>            
         </div>
     </div>
 </div>

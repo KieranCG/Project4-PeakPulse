@@ -47,12 +47,15 @@ def all_exercises(request):
     except EmptyPage:
         page_obj = paginator.page(paginator.num_pages)
 
+    # Pass the filtered queryset to the template
     context = {
         'page_obj': page_obj,
         'search_term': search_term,
+        'exercises': exercises_list,  # Pass the filtered queryset
     }
 
     return render(request, 'exercises/exercises.html', context)
+
 
 
 def exercise_detail(request, exercise_id):
