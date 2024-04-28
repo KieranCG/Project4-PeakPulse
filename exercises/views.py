@@ -57,7 +57,6 @@ def all_exercises(request):
     return render(request, 'exercises/exercises.html', context)
 
 
-
 def exercise_detail(request, exercise_id):
     """ A view to show individual exercise details """
 
@@ -82,6 +81,7 @@ def all_exercise_logs(request):
     return render(request, 'exercises/exercise_logs.html', context)
 
 
+@login_required
 def exercise_log_detail(request, exercise_log_id):
     """ A view to show details of a single exercise log """
     exercise_log = get_object_or_404(ExerciseLog, pk=exercise_log_id)
