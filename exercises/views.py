@@ -124,3 +124,23 @@ def add_exercise_log(request):
     exercises = Exercise.objects.all()
 
     return render(request, 'exercises/add_exercise_log.html', {'form': form, 'exercises': exercises})
+
+
+@login_required
+def edit_exercise_log(request, log_id):
+    """ A view to edit an existing exercise log """
+
+    log_instance = get_object_or_404(ExerciseLog, pk=log_id)
+
+    if request.method == 'POST':
+        # If the form is submitted, populate it with the POST data and the instance of the log to be edited
+        form = ExerciseLogForm(request.POST, instance=log_instance)
+        if form.is_valid():
+            # Save the edited log instance
+            form.save()
+            return redirect('exercise_logs')
+    else:
+        # If it's a GET request, initialize the form with the data from the log instance
+        form = ExerciseLogForm(instance=log_instance)
+
+    return render(request, 'exercises/edit_exercise_log.html', {'form': form, 'exercise_log': log_instance})

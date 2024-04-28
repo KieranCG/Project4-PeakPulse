@@ -30,7 +30,8 @@
                     <p>Distance: {{ exercise_log.distance }}</p>
                     <p>Intensity: {{ exercise_log.intensity }}</p>
                     <p>Notes: {{ exercise_log.notes }}</p>
-                    <a href="{% url 'exercise_logs' %}" class="btn btn-outline-black rounded-0 mt-5">Back to Exercise Logs</a>
+                    <a href="{% url 'exercise_logs' %}" class="btn btn-outline-black rounded-0 mt-3">Back to Exercise Logs</a>
+                    <a href="{% url 'edit_exercise_log' exercise_log.id %}" class="btn btn-outline-black rounded-0 mt-3">Edit Log</a> <!-- Add Edit Log button -->
                 </div>
             </div>
         </div>

@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <hr>
+                <h2 class="logo-font mb-4">Exercise Log Management</h2>
+                <h5 class="text-muted">Edit Exercise Log</h5> <!-- Change the heading -->
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <form method="POST" action="" class="form mb-2" enctype="multipart/form-data"> <!-- Update the form action -->
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exercise">Exercise</label>
+                        <select id="exercise" name="exercise" class="form-control">
+                            <option value="">Select an exercise</option>
+                            {% for exercise in exercises %}
+                                {% if exercise == selected_exercise %}
+                                    <option value="{{ exercise.id }}" selected>{{ exercise.title }}</option>
+                                {% else %}
+                                    <option value="{{ exercise.id }}">{{ exercise.title }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required class="form-control mb-3" value="{{ log_date }}">
+
+
+                    <label for="sets">Sets:</label>
+                    <input type="number" id="sets" name="sets" min="1" value="{{ exercise_log.sets }}" required class="form-control mb-3"> <!-- Populate with existing data -->
+
+                    <label for="repetitions">Repetitions:</label>
+                    <input type="number" id="repetitions" name="repetitions" min="1" value="{{ exercise_log.repetitions }}" required class="form-control mb-3"> <!-- Populate with existing data -->
+
+                    <label for="duration">Duration (seconds):</label>
+                    <input type="number" id="duration" name="duration" min="1" value="{{ exercise_log.duration }}" class="form-control mb-3"> <!-- Populate with existing data -->
+
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" min="0" step="0.01" value="{{ exercise_log.weight }}" class="form-control mb-3"> <!-- Populate with existing data -->
+
+                    <label for="distance">Distance (km):</label>
+                    <input type="number" id="distance" name="distance" min="0" step="0.01" value="{{ exercise_log.distance }}" class="form-control mb-3"> <!-- Populate with existing data -->
+
+                    <label for="intensity">Intensity:</label>
+                    <input type="text" id="intensity" name="intensity" value="{{ exercise_log.intensity }}" class="form-control mb-3"> <!-- Populate with existing data -->
+
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" name="notes" class="form-control mb-3">{{ exercise_log.notes }}</textarea> <!-- Populate with existing data -->
+                    <div class="text-right">
+                        <a class="btn btn-outline-black rounded-0" href="{% url 'exercise_logs' %}">Cancel</a>
+                        <button class="btn btn-black rounded-0" type="submit">Save Changes</button> <!-- Update button text -->
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+{% endblock %}
