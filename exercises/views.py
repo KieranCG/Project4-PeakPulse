@@ -108,11 +108,14 @@ def create_exercise_log(request):
     return render(request, 'exercises/exercise_log_form.html', {'form': form})
 
 
+@login_required
 def add_exercise_log(request):
     if request.method == 'POST':
         form = ExerciseLogForm(request.POST)
         if form.is_valid():
-            form.save()
+            exercise_log = form.save(commit=False)
+            exercise_log.user = request.user  # Set the user to the logged-in user
+            exercise_log.save()
             return redirect('exercise_logs')  # Redirect to the exercise logs page after adding the log
     else:
         form = ExerciseLogForm()
