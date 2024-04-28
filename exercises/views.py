@@ -143,4 +143,7 @@ def edit_exercise_log(request, log_id):
         # If it's a GET request, initialize the form with the data from the log instance
         form = ExerciseLogForm(instance=log_instance)
 
-    return render(request, 'exercises/edit_exercise_log.html', {'form': form, 'exercise_log': log_instance})
+    # Pass the list of exercises and the date of the log instance to the template
+    exercises = Exercise.objects.all()
+    log_date = log_instance.date
+    return render(request, 'exercises/edit_exercise_log.html', {'form': form, 'exercise_log': log_instance, 'exercises': exercises, 'log_date': log_date})

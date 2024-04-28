@@ -50,7 +50,7 @@
                     <input type="number" id="repetitions" name="repetitions" min="1" value="{{ exercise_log.repetitions }}" required class="form-control mb-3"> <!-- Populate with existing data -->
 
                     <label for="duration">Duration (seconds):</label>
-                    <input type="number" id="duration" name="duration" min="1" value="{{ exercise_log.duration }}" class="form-control mb-3"> <!-- Populate with existing data -->
+                    <input type="number" id="duration" name="duration" min="1" value="{{ exercise_log.duration.total_seconds }}" class="form-control mb-3">
 
                     <label for="weight">Weight (kg):</label>
                     <input type="number" id="weight" name="weight" min="0" step="0.01" value="{{ exercise_log.weight }}" class="form-control mb-3"> <!-- Populate with existing data -->
