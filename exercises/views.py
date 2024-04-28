@@ -1,5 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models.functions import Lower
 from .models import Exercise, ExerciseLog
 from django.db.models import F, Q
@@ -106,3 +106,18 @@ def create_exercise_log(request):
     else:
         form = ExerciseLogForm()
     return render(request, 'exercises/exercise_log_form.html', {'form': form})
+
+
+def add_exercise_log(request):
+    if request.method == 'POST':
+        form = ExerciseLogForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('exercise_logs')  # Redirect to the exercise logs page after adding the log
+    else:
+        form = ExerciseLogForm()
+
+    # Fetch all exercises from the database
+    exercises = Exercise.objects.all()
+
+    return render(request, 'exercises/add_exercise_log.html', {'form': form, 'exercises': exercises})

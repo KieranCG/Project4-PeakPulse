@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <hr>
+                <h2 class="logo-font mb-4">Exercise Log Management</h2>
+                <h5 class="text-muted">Add an Exercise Log</h5>
+                <hr>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-md-6">
+                <form method="POST" action="{% url 'add_exercise_log' %}" class="form mb-2" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exercise">Exercise</label>
+                        <select id="exercise" name="exercise" class="form-control">
+                            <option value="">Select an exercise</option>
+                            {% for exercise in exercises %}
+                                <option value="{{ exercise.id }}">{{ exercise.title }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <label for="date">Date:</label>
+                    <input type="date" id="date" name="date" required class="form-control mb-3">
+
+                    <label for="sets">Sets:</label>
+                    <input type="number" id="sets" name="sets" min="1" value="1" required class="form-control mb-3">
+
+                    <label for="repetitions">Repetitions:</label>
+                    <input type="number" id="repetitions" name="repetitions" min="1" value="1" required class="form-control mb-3">
+
+                    <label for="duration">Duration (seconds):</label>
+                    <input type="number" id="duration" name="duration" min="1" class="form-control mb-3">
+
+                    <label for="weight">Weight (kg):</label>
+                    <input type="number" id="weight" name="weight" min="0" step="0.01" class="form-control mb-3">
+
+                    <label for="distance">Distance (km):</label>
+                    <input type="number" id="distance" name="distance" min="0" step="0.01" class="form-control mb-3">
+
+                    <label for="intensity">Intensity:</label>
+                    <input type="text" id="intensity" name="intensity" class="form-control mb-3">
+
+                    <label for="notes">Notes:</label>
+                    <textarea id="notes" name="notes" class="form-control mb-3"></textarea>
+                    <div class="text-right">
+                        <a class="btn btn-outline-black rounded-0" href="{% url 'exercise_logs' %}">Cancel</a>
+                        <button class="btn btn-black rounded-0" type="submit">Add Exercise Log</button>
+                    </div>
+                </form>
+            </div>            
+        </div>
+    </div>
+{% endblock %}
