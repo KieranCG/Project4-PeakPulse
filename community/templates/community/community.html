@@ -9,13 +9,13 @@
             <hr class="w-50 mb-1">
         </div>
     </div>
-    <div class="row">
+    <div id="community-posts" class="row justify-content-center mt-5">
         {% for post in posts %}
-        <div class="col-md-8 offset-md-2 mb-4">
+        <div class="col-md-8 mb-4">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">Posted by: {{ post.user.username }}</h5>
-                    <p class="card-text">Created at: {{ post.created_at }}</p>
+                    <h5 class="card-title mb-0" style="font-size: 16px;">Posted by: {{ post.user.username }}</h5>
+                    <p class="card-text mb-1" style="font-size: 14px;">Created at: {{ post.created_at }}</p>
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{ post.content }}</p>
@@ -23,13 +23,13 @@
             </div>
         </div>
         {% empty %}
-        <div class="col text-center">
+        <div class="col-md-8 text-center">
             <p>No posts available</p>
         </div>
         {% endfor %}
     </div>
-    <div class="row">
-        <div class="col text-center">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
             <a href="#" class="btn btn-outline-black rounded-0 mt-3">Add Post</a>
         </div>
     </div>

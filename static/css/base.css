@@ -352,3 +352,7 @@ input[name='q']::placeholder {
     font-weight: bold;
 }
 
+/* Custom styling for the community posts section */
+#community-posts {
+    margin-top: 6rem !important;
+}
