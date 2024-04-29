@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Comment
+from .models import Post, Comment, Testimonial
 
 
 class PostAdmin(admin.ModelAdmin):
@@ -19,5 +19,14 @@ class CommentAdmin(admin.ModelAdmin):
     )
 
 
+class TestimonialAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'content',
+        'created_at',
+    )
+
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
+admin.site.register(Testimonial, TestimonialAdmin)

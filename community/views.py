@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Post
-from .forms import PostForm
+from .models import Post, Testimonial
+from .forms import PostForm, TestimonialForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
@@ -30,3 +30,9 @@ def add_post(request):
     else:
         form = PostForm()
     return render(request, 'community/add_post.html', {'form': form})
+
+
+def testimonials_view(request):
+    """ A view to display testimonials """
+    testimonials = Testimonial.objects.all().order_by('-created_at')
+    return render(request, 'community/testimonials.html', {'testimonials': testimonials})
