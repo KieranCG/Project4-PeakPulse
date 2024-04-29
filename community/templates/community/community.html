@@ -14,8 +14,8 @@
         <div class="col-md-8 offset-md-2 mb-4">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="card-title">{{ post.user }}</h5>
-                    <p class="card-text">{{ post.created_at }}</p>
+                    <h5 class="card-title">Posted by: {{ post.user.username }}</h5>
+                    <p class="card-text">Created at: {{ post.created_at }}</p>
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{ post.content }}</p>
@@ -27,6 +27,11 @@
             <p>No posts available</p>
         </div>
         {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col text-center">
+            <a href="#" class="btn btn-outline-black rounded-0 mt-3">Add Post</a>
+        </div>
     </div>
 </div>
 {% endblock %}
