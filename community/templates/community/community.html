@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col text-center mt-3">
+            <h2 class="logo-font">Community Wall</h2>
+            <hr class="w-50 mb-1">
+        </div>
+    </div>
+    <div class="row">
+        {% for post in posts %}
+        <div class="col-md-8 offset-md-2 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">{{ post.user }}</h5>
+                    <p class="card-text">{{ post.created_at }}</p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ post.content }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col text-center">
+            <p>No posts available</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
