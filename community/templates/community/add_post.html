@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col text-center mt-3">
+            <h2 class="logo-font">Add New Post</h2>
+            <hr class="w-50 mb-1">
+        </div>
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-8">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="content">Content:</label>
+                    <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+                </div>
+                <button type="submit" class="btn btn-black rounded-0">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
