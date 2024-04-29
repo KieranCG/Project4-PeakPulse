@@ -2,6 +2,7 @@ from django.core.paginator import Paginator, EmptyPage
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models.functions import Lower
 from .models import Exercise, ExerciseLog
+from django.contrib import messages
 from django.db.models import F, Q
 from .forms import ExerciseLogForm
 from django.contrib.auth.decorators import login_required
@@ -114,36 +115,31 @@ def add_exercise_log(request):
         form = ExerciseLogForm(request.POST)
         if form.is_valid():
             exercise_log = form.save(commit=False)
-            exercise_log.user = request.user  # Set the user to the logged-in user
+            exercise_log.user = request.user
             exercise_log.save()
-            return redirect('exercise_logs')  # Redirect to the exercise logs page after adding the log
+            messages.success(request, 'Exercise log added successfully!')
+            return redirect('exercise_logs')
+        else:
+            messages.error(request, 'Failed to add exercise log. Please ensure the form is valid.')
     else:
         form = ExerciseLogForm()
-
-    # Fetch all exercises from the database
     exercises = Exercise.objects.all()
-
     return render(request, 'exercises/add_exercise_log.html', {'form': form, 'exercises': exercises})
 
 
 @login_required
 def edit_exercise_log(request, log_id):
-    """ A view to edit an existing exercise log """
-
     log_instance = get_object_or_404(ExerciseLog, pk=log_id)
-
     if request.method == 'POST':
-        # If the form is submitted, populate it with the POST data and the instance of the log to be edited
         form = ExerciseLogForm(request.POST, instance=log_instance)
         if form.is_valid():
-            # Save the edited log instance
             form.save()
+            messages.success(request, 'Exercise log updated successfully!')
             return redirect('exercise_logs')
+        else:
+            messages.error(request, 'Failed to update exercise log. Please ensure the form is valid.')
     else:
-        # If it's a GET request, initialize the form with the data from the log instance
         form = ExerciseLogForm(instance=log_instance)
-
-    # Pass the list of exercises and the date of the log instance to the template
     exercises = Exercise.objects.all()
     log_date = log_instance.date
     return render(request, 'exercises/edit_exercise_log.html', {'form': form, 'exercise_log': log_instance, 'exercises': exercises, 'log_date': log_date})
