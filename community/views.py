@@ -36,3 +36,24 @@ def testimonials_view(request):
     """ A view to display testimonials """
     testimonials = Testimonial.objects.all().order_by('-created_at')
     return render(request, 'community/testimonials.html', {'testimonials': testimonials})
+
+
+@login_required
+def add_testimonial(request):
+    if request.method == 'POST':
+        form = TestimonialForm(request.POST)
+        if form.is_valid():
+            # Save the testimonial
+            testimonial = form.save(commit=False)
+            testimonial.user = request.user
+            testimonial.save()
+            # Add a success message
+            messages.success(request, 'Testimonial added successfully!')
+            # Redirect to the testimonials page
+            return redirect('community:testimonials')
+        else:
+            # Add an error message if the form is not valid
+            messages.error(request, 'Failed to add testimonial. Please check the form.')
+    else:
+        form = TestimonialForm()
+    return render(request, 'community/add_testimonial.html', {'form': form})
