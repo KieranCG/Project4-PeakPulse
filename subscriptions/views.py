@@ -13,7 +13,10 @@ def subscriptions_view(request):
     return render(request, 'subscriptions/subscriptions.html')
 
 
+@csrf_exempt
 @login_required
 def subscription_checkout(request):
     """ View logic for the subscription checkout page """
+    if request.method == 'POST':
+        pass  # Placeholder for actual logic
     return render(request, 'subscriptions/subscriptions_checkout.html')
