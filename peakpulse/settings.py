@@ -178,6 +178,8 @@ STRIPE_CURRENCY = 'gbp'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
+STRIPE_YEARLY_PRICE_ID = '<prod_Q1CBQnvtc0rFHW>'
+STRIPE_MONTHLY_PRICE_ID = '<price_1PB9ltGz3pLFtJboWBzDanoR>'
 DEFAULT_FROM_EMAIL = 'PeakPulse@example.com'
 
 # Default primary key field type

@@ -1,110 +1,216 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# PeakPulse
 
-Welcome USER_NAME,
+## Project Introduction
+This project is a the final project for my Code Institute learning programe. It is predominately designed to showcase a website built using Django and deployed to Heroku.
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+To view the deployed website click [here]
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
+### User Story
 
-## Gitpod Reminders
+1. **As a fitness enthusiast, I want to browse and purchase gym equipment online, so I can conveniently access high-quality gear for my workouts.**
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+2. **As a user, I want to access a database of exercises categorized by muscle group and equipment, so I can discover new workouts and plan my fitness routines effectively.**
 
-`python3 -m http.server`
+3. **As a fitness enthusiast, I want to log my own exercises and workouts, so I can track my progress and stay motivated to achieve my fitness goals.**
 
-A blue button should appear to click: _Make Public_,
+4. **As a community member, I want to engage with other users by leaving posts on a community wall, so I can share my fitness journey, ask questions, and provide support to fellow members.**
 
-Another blue button should appear to click: _Open Browser_.
+5. **As a user, I want to leave testimonials about my experience with PeakPulse, so I can share my satisfaction with the platform and encourage others to join the community.**
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+## About the Development Cycle
 
-A blue button should appear to click: _Make Public_,
+### Planning
 
-Another blue button should appear to click: _Open Browser_.
+- **Objective**: Create a website platform that meets the needs of gym enthusiasts and home sportspeople.
+- **Activities**:
+  - Define the core features and functionality of the app, such as webstore, search, and user profiles.
+  - Identify the target audience, including gym enthusiasts, home sportspeople, and diet users.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+### Requirements Gathering
 
-To log into the Heroku toolbelt CLI:
+- **Objective:** Identify detailed requirements to inform the design and development process.
+- **Activities:**
+  - Define user stories and personas to understand user needs and expectations.
+  - Identify technical requirements, including platform compatibility and data storage options.
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+1. **Technologies Used**:
+   - Django
+   - Python 3.x
+   - HTML/CSS
+   - JavaScript
+   - Bootstrap
+   - jQuery
+   - Git
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+2. **Development Process**:
+   - PeakPulse was developed using an agile development methodology, with iterative cycles of planning, implementation, testing, and deployment.
+   - Project management and collaboration were facilitated through GitHub for version control and Slack for communication.
+   - Continuous integration and continuous deployment (CI/CD) pipelines were set up to automate testing and deployment processes.
 
-------
+3. **Feature Implementation**:
+   - Features such as the online shop, exercise database, and community wall were implemented using Django's built-in functionalities and third-party libraries.
+   - Challenges faced during implementation included integrating payment gateways for the online shop and implementing real-time updates for the community wall.
 
-## Release History
+4. **Testing and Quality Assurance**:
+   - Integration testing was performed to validate interactions between different modules and functionalities.
+   - Static code analysis tools such as pylint and flake8 were used to maintain code quality and adherence to coding standards.
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+5. **Feedback and Iteration**:
+   - User feedback was collected through a small group of external testers that feedback to the developer.
+   - Iterative updates were made to PeakPulse based on user feedback, including enhancements to the user interface, performance optimizations, and bug fixes.
+   - The project roadmap was continuously refined based on user needs.
 
-**September 20 2023:** Update Python version to 3.9.17.
+6. **Future Development Plans**:
+   - Future development plans for PeakPulse include implementing social media integration for user authentication, enhancing the recommendation engine for personalized workout suggestions, and expanding the product catalog in the online shop.
+   - Community contributions and suggestions for new features are welcomed and encouraged to further enrich the PeakPulse platform.
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+## Data Models
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+### Exercise Models
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+#### Exercise Category
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+- Represents categories of exercises.
+- Attributes:
+  - `name`: Name of the category.
+  - `friendly_name`: Friendly name for display purposes.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+#### Exercise
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+- Represents individual exercises logged by users.
+- Attributes:
+  - `user`: ForeignKey to link each exercise with a user.
+  - `title`: Title of the exercise.
+  - `description`: Description of the exercise.
+  - `bodypart`: Body part targeted by the exercise.
+  - `equipment`: Equipment required for the exercise.
+  - `level`: Difficulty level of the exercise.
+  - `rating`: Rating of the exercise.
+  - `ratingdesc`: Description of the exercise rating.
+  - `category`: ForeignKey to link each exercise with an ExerciseCategory.
+  - Additional Fields:
+    - `sets`: Number of sets performed.
+    - `repetitions`: Number of repetitions per set.
+    - `duration`: Duration of the exercise.
+    - `weight`: Weight used for the exercise.
+    - `distance`: Distance covered during the exercise.
+    - `intensity`: Intensity level or heart rate.
+    - `notes`: Additional notes or comments.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+#### Exercise Log
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+- Represents logs of exercises performed by users.
+- Attributes:
+  - `user`: ForeignKey to link each log with a user.
+  - `exercise`: ForeignKey to link each log with an Exercise.
+  - `date`: Date of the exercise log.
+  - `sets`: Number of sets performed.
+  - `repetitions`: Number of repetitions per set.
+  - `duration`: Duration of the exercise.
+  - `weight`: Weight used for the exercise.
+  - `distance`: Distance covered during the exercise.
+  - `intensity`: Intensity level or heart rate.
+  - `notes`: Additional notes or comments.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+### Product Models
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+#### Category
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+- Represents categories of products available in the shop.
+- Attributes:
+  - `name`: Name of the category.
+  - `friendly_name`: Friendly name for display purposes.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+#### Product
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+- Represents individual products available for purchase.
+- Attributes:
+  - `category`: ForeignKey to link each product with a Category.
+  - `sku`: Stock Keeping Unit for the product.
+  - `name`: Name of the product.
+  - `description`: Description of the product.
+  - `has_sizes`: Indicates if the product comes in different sizes.
+  - `price`: Price of the product.
+  - `rating`: Rating of the product.
+  - `image_url`: URL of the product image.
+  - `image`: Image file of the product.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+### Community Models
 
-------
+#### Post
 
-## FAQ about the uptime script
+- Represents posts created by users on the community wall.
+- Attributes:
+  - `user`: ForeignKey to link each post with a user.
+  - `content`: Content of the post.
+  - `created_at`: Date and time when the post was created.
 
-**Why have you added this script?**
+#### Comment
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+- Represents comments left by users on posts.
+- Attributes:
+  - `user`: ForeignKey to link each comment with a user.
+  - `post`: ForeignKey to link each comment with a post.
+  - `content`: Content of the comment.
+  - `created_at`: Date and time when the comment was created.
 
-**How will this affect me?**
+#### Testimonial
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+- Represents testimonials left by users.
+- Attributes:
+  - `user`: ForeignKey to link each testimonial with a user.
+  - `content`: Content of the testimonial.
+  - `created_at`: Date and time when the testimonial was created.
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+### User Profile Model
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+#### UserProfile
 
-**So….?**
+- Represents user profiles containing default delivery information and order history.
+- Attributes:
+  - `user`: OneToOneField linking each profile with a user.
+  - `default_phone_number`: Default phone number for delivery.
+  - `default_street_address1`: First line of default street address.
+  - `default_street_address2`: Second line of default street address.
+  - `default_town_or_city`: Default town or city for delivery.
+  - `default_county`: Default county for delivery.
+  - `default_postcode`: Default postcode for delivery.
+  - `default_country`: Default country for delivery.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+### Signals
 
-**Can I opt out?**
+- `create_or_update_user_profile`: Signal to create or update the user profile when a user is created or updated.
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+## UI Design
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+### Design Principles
+- The user interface (UI) design for PeakPulse is guided by principles of simplicity, consistency, and usability.
+- Our goal is to provide users with an intuitive and visually appealing experience that facilitates their fitness journey.
 
-**Anything more?**
+### Components and Layout
+- The UI incorporates common components such as navigation bars, cards, and grids to organize content effectively.
+- Screenshots of the website layout demonstrate the arrangement of components on different pages, ensuring a clear and coherent structure.
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+### Styling and Theming
+- PeakPulse features a modern and energetic visual style, with vibrant color schemes and bold typography to reflect its fitness-oriented branding.
+- The chosen styling decisions aim to create a motivating and inspiring atmosphere for users as they engage with the platform.
 
----
+### Responsive Design
+- The UI design is responsive, adapting seamlessly to various screen sizes and devices, including desktops, tablets, and mobile phones.
+- Techniques such as fluid layouts and media queries ensure that the user experience remains consistent and optimized across different devices.
 
-Happy coding!
+### Accessibility Considerations
+- Accessibility features are integrated into the UI design to ensure that PeakPulse is usable by people with disabilities.
+- Compliance with accessibility guidelines and best practices improves inclusivity and ensures a positive experience for all users.
+
+### Interactive Elements
+- Interactive elements such as buttons, forms, and animations enhance user engagement and interactivity on the PeakPulse website.
+- These elements contribute to a dynamic and engaging experience, encouraging users to interact with the platform and track their fitness progress actively.
+
+### User Feedback and Iteration
+- User feedback and usability testing have played a significant role in iterating on the UI design of PeakPulse.
+- Changes and improvements based on user input have helped optimize the user experience and address any pain points encountered by users.
+
+### Future Design Enhancements
+- In the future, we plan to explore additional design enhancements and features to further enhance the UI of PeakPulse.
+- We welcome feedback and suggestions from users and contributors to help shape the evolution of the UI design over time.
