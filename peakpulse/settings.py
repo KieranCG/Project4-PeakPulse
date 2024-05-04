@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-%0!_dv942*@@(^$yv*ae9=4@u78niax7wb^^2!0@rb$%1_wn7l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['8000-kierancg-project4peakpu-01gevits1sg.ws-eu110.gitpod.io']
+ALLOWED_HOSTS = ['8000-kierancg-project4peakpu-01gevits1sg.ws-eu111.gitpod.io']
 
 
 # Application definition
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'profiles',
     'exercises',
     'community',
+    'subscriptions',
 
     # Other
     'crispy_forms',
@@ -177,8 +178,7 @@ STRIPE_CURRENCY = 'gbp'
 STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
 STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
 STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
-STRIPE_YEARLY_PRICE_ID = '<prod_Q1CBQnvtc0rFHW>'
-STRIPE_MONTHLY_PRICE_ID = '<price_1PB9ltGz3pLFtJboWBzDanoR>'
+STRIPE_PRICE_ID = 'price_1PB9ltGz3pLFtJboWBzDanoR'
 DEFAULT_FROM_EMAIL = 'PeakPulse@example.com'
 
 # Default primary key field type
