@@ -33,7 +33,6 @@ def subscription_required(view_func):
             print(f"Stripe API Error: {e}")
             return redirect(reverse('home'))  # Redirect to home page or an appropriate error page
 
-
         # Check if the subscription status is active
         if subscription.status != 'active':
             messages.error(request, 'Your subscription is inactive. Please renew your subscription to access this page.')
