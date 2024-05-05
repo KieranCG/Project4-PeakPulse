@@ -6,8 +6,10 @@ from django.contrib import messages
 from django.db.models import F, Q
 from .forms import ExerciseLogForm
 from django.contrib.auth.decorators import login_required
+from decorators import subscription_required
 
 
+@subscription_required
 def all_exercises(request):
     """ A view to show all exercises, including sorting and search queries """
 
