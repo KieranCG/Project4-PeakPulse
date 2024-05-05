@@ -3,8 +3,10 @@ from .models import Post, Testimonial
 from .forms import PostForm, TestimonialForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from decorators import subscription_required
 
 
+@subscription_required
 def community_view(request):
     """ A view to show all posts, including sorting """
     posts = Post.objects.all()
