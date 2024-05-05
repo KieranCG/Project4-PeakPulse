@@ -13,7 +13,20 @@ from django.contrib.auth.models import User
 @login_required
 def subscriptions_view(request):
     """ View function to render subscriptions.html template """
-    return render(request, 'subscriptions/subscriptions.html')
+    try:
+        # Retrieve the subscription & product
+        stripe_customer = StripeCustomer.objects.get(user=request.user)
+        stripe.api_key = settings.STRIPE_SECRET_KEY
+        subscription = stripe.Subscription.retrieve(stripe_customer.stripeSubscriptionId)
+        product = stripe.Product.retrieve(subscription.plan.product)
+
+        return render(request, 'subscriptions/subscriptions.html', {
+                'subscription': subscription,
+                'product': product,
+            })
+
+    except StripeCustomer.DoesNotExist:
+        return render(request, 'subscriptions/subscriptions.html')
 
 
 @csrf_exempt
