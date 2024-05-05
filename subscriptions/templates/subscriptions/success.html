@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_header %}
+    <div class="container header-container">
+        <div class="row">
+            <div class="col"></div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+<div class="overlay"></div>
+<div class="container-fluid d-flex flex-column justify-content-center align-items-center">
+    <div class="row">
+        <div class="col text-center mt-3">
+            <h2 class="logo-font">Success</h2>
+            <hr class="w-50 mb-1">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-10 offset-1">
+            <div class="row mt-1 mb-2">
+                <div class="col-12 col-md-6 my-auto order-md-last d-flex justify-content-center justify-content-md-end">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <p>You have successfully subscribed!</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <p><a href="{% url 'home' %}">Return to the dashboard</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

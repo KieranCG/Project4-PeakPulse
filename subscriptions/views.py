@@ -28,8 +28,8 @@ def create_checkout_session(request):
         try:
             checkout_session = stripe.checkout.Session.create(
                 client_reference_id=request.user.id if request.user.is_authenticated else None,
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'cancel/',
+                success_url=domain_url + 'subscriptions/success?session_id={CHECKOUT_SESSION_ID}',
+                cancel_url=domain_url + 'subscriptions/cancel/',
                 payment_method_types=['card'],
                 mode='subscription',
                 line_items=[
@@ -42,3 +42,13 @@ def create_checkout_session(request):
             return JsonResponse({'sessionId': checkout_session['id']})
         except Exception as e:
             return JsonResponse({'error': str(e)})
+
+
+@login_required
+def success(request):
+    return render(request, 'subscriptions/success.html')
+
+
+@login_required
+def cancel(request):
+    return render(request, 'subscriptions/cancel.html')
