@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpRequest
 
 
 @login_required
@@ -21,9 +22,9 @@ def stripe_config(request):
 
 
 @csrf_exempt
-def create_checkout_session(request):
+def create_checkout_session(request: HttpRequest):
     if request.method == 'GET':
-        domain_url = 'http://localhost:8000/'
+        domain_url = request.build_absolute_uri('/')  # This will dynamically get the current domain
         stripe.api_key = settings.STRIPE_SECRET_KEY
         try:
             checkout_session = stripe.checkout.Session.create(
