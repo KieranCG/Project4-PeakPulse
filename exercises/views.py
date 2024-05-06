@@ -22,7 +22,6 @@ def all_exercises(request):
         sortkey = 'title'
     elif sort == 'rating':
         sortkey = 'rating'
-    # Add other sorting options as needed
 
     direction = request.GET.get('direction')
     if direction == 'desc':
@@ -41,7 +40,7 @@ def all_exercises(request):
         exercises_list = exercises_list.filter(queries)
 
     # Pagination
-    items_per_page = 20  # Change this to the desired number of items per page
+    items_per_page = 20
     paginator = Paginator(exercises_list, items_per_page)
     page_number = request.GET.get('page', 1)
 

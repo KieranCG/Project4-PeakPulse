@@ -1,5 +1,3 @@
-console.log("Base js sanity check");
-
 // Get Stripe publishable key
 fetch("config/")
 .then((result) => { 

@@ -301,7 +301,7 @@ In the future, we plan to further enhance the testing process by expanding test 
 Warnings regarding old es6 taken into account.
 
 ### Chrome Lighthouse Reporting
-![Lighthouse report](media/readme_images/lighthouse-report.png)
+![Lighthouse report](media/readme_images/lighthouse-reporting.png)
 Performance issues noted and being worked on.
 
 ## About the Development Cycle
