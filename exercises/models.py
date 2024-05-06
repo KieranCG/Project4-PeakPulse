@@ -37,6 +37,7 @@ class Exercise(models.Model):
     def __str__(self):
         return self.title
 
+
 class ExerciseLog(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
