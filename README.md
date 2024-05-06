@@ -274,7 +274,8 @@ The project is integrated with continuous integration pipelines using GitHub Act
 ### Manual Testing
 Manual testing procedures are carried out by the development team to supplement automated tests. This includes exploratory testing, usability testing, and ad-hoc testing to validate the application's behavior in real-world scenarios.
 Please see the document in the static/docs folder PeakPulse Module Testing. These manual tests were carried out with every app and template creation.
-[Module Testing](static/docs/peakpulse-module-testing.docx)
+- [Module Testing](static/docs/peakpulse-module-testing.docx)
+- [Module Testing Subscriptions App](static/docs/peakpulse-module-testing-subscriptions-app.docx)
 
 
 ### Bug Tracking:
