@@ -21,7 +21,7 @@ def subscription_required(view_func):
             stripe_customer = StripeCustomer.objects.get(user=user)
         except StripeCustomer.DoesNotExist:
             messages.error(request, 'You need to have a subscription to access this page.')
-            return redirect(reverse('subscriptions_signup'))  # Redirect to subscription signup page if user does not have a profile
+            return redirect(reverse('subscriptions'))  # Redirect to subscription signup page if user does not have a profile
 
         # Check the subscription status using Stripe API
         stripe.api_key = settings.STRIPE_SECRET_KEY
