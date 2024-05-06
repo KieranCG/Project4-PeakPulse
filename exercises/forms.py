@@ -27,7 +27,7 @@ class ExerciseLogForm(forms.ModelForm):
 
         self.fields['exercise'].widget.attrs['autofocus'] = True
         for field in self.fields:
-            if field != 'date':  # You might want to customize the date field separately if needed
+            if field != 'date':
                 if self.fields[field].required:
                     placeholder = f'{placeholders[field]} *'
                 else:

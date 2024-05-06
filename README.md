@@ -162,7 +162,6 @@ I had intended to include more apps allowing users to set dynamic goals as well 
 - Attributes:
   - `name`: Name of the category.
   - `friendly_name`: Friendly name for display purposes.
-3:30
 #### Exercise
 - Represents individual exercises logged by users.
 - Attributes:
