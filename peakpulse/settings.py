@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '8000-kierancg-project4peakpu-01gevits1sg.ws-eu111.gitpod.io',
-    'kg-peakpulse.herokuapp.com',
+    'kg-peakpulse-8b8e11dcfc26.herokuapp.com',
 ]
 
 
