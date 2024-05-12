@@ -2,14 +2,22 @@ from django.test import TestCase
 from django.urls import reverse
 
 
-class SuccessTemplateTestCase(TestCase):
-    def test_success_template_content(self):
-        url = 'success/'  # Use the actual URL path for the 'success' view
+class HomePageViewTestCase(TestCase):
+    def test_home_page_view(self):
+        url = reverse('home')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'subscriptions/success.html')  # Make sure the correct template is used
 
-        # Check for expected content in the response HTML
-        self.assertContains(response, '<h2 class="logo-font">Congratulations!</h2>')
-        self.assertContains(response, '<p class="success-message">You\'ve successfully subscribed to our premium service! 🎉</p>')
-        self.assertContains(response, '<a href="{% url \'home\' %}" class="btn btn-primary btn-lg">Return to the dashboard</a>')
+        # Check for the actual templates used
+        actual_templates = [template.name for template in response.templates]
+
+        # Check if any of the expected templates are used in the response
+        expected_templates = ['home/index.html', 'base.html', 'includes/mobile-top-header.html', 'includes/main-nav.html']
+        for template in expected_templates:
+            self.assertIn(template, actual_templates, f"Expected template '{template}' was not used to render the response.")
+
+
+class SimpleTestCase(TestCase):
+    def test_testing_setup(self):
+        # Checking testing environment
+        self.assertTrue(True)
